@@ -13,6 +13,13 @@ jobs:
         uses: actions/checkout@master
       - name: Install Dependencies
         run: npm install
+      - name: Create env file
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: node server.js
+        env:
+          FIREBASE_DETAILS: '${{ secrets.FIREBASE_DETAILS }}'
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
@@ -20,6 +27,7 @@ jobs:
         with:
           name: dist
           path: dist
+
   deploy:
     name: Deploy
     needs: build
