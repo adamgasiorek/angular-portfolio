@@ -41,8 +41,10 @@ jobs:
           name: dist
           path: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          args: deploy --only hosting
-        env:
-          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ADAMGASIOREK_WEBSITE }}
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_ADAMGASIOREK_WEBSITE }}
+          projectId: adamgasiorek-website
+          env:
+            FIREBASE_CLI_EXPERIMENTS: webframeworks
