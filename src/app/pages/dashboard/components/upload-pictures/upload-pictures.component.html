@@ -1,1 +1,20 @@
-<p>upload-pictures works!</p>
+<button (click)="save()"
+        class="mb-4 bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
+  Save
+</button>
+
+<app-upload-box (selectedFiles)="onFilesSelected($event)"></app-upload-box>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+  @for (item of images; track item) {
+    <div class="square">
+      <div class="content">
+        @if(item.loading) {
+          <div class="animate-pulse bg-gray-100 h-full"></div>
+        } @else if (item.thumbnail) {
+          <img [src]="item.thumbnail" />
+        }
+      </div>
+    </div>
+  }
+</div>
