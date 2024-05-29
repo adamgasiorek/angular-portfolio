@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/c
 import {UploadBoxComponent} from "./upload-box/upload-box.component";
 import {ref, uploadBytesResumable, Storage, getDownloadURL} from "@angular/fire/storage";
 import {AsyncPipe} from "@angular/common";
+import {UploadPicturesLoadingComponent} from "./upload-pictures-loading/upload-pictures-loading.component";
 
 interface UploadPicture {
   file: File;
@@ -15,7 +16,8 @@ interface UploadPicture {
   standalone: true,
   imports: [
     UploadBoxComponent,
-    AsyncPipe
+    AsyncPipe,
+    UploadPicturesLoadingComponent
   ],
   templateUrl: './upload-pictures.component.html',
   styleUrl: './upload-pictures.component.scss'
