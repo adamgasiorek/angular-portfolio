@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {Auth, signOut} from "@angular/fire/auth";
-import {Router} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  imports: [
+    RouterLink,
+    RouterLinkActive
+  ],
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent {
 

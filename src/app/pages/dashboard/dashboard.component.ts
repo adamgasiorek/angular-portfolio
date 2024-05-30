@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Auth, authState, signOut, User} from "@angular/fire/auth";
-import {Router} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {EMPTY, Observable} from "rxjs";
 import {HeaderComponent} from "./components/header/header.component";
@@ -13,7 +13,8 @@ import {UploadPicturesComponent} from "./components/upload-pictures/upload-pictu
     AsyncPipe,
     JsonPipe,
     HeaderComponent,
-    UploadPicturesComponent
+    UploadPicturesComponent,
+    RouterOutlet
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

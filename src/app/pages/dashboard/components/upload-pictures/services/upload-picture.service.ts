@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import {getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/storage";
 import {UploadValue} from "../models/upload-value";
+import {addDoc, collection, Firestore} from "@angular/fire/firestore";
+import {Picture} from "../models/picture";
 
 
 
 @Injectable()
 export class UploadPictureService {
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage, private firestore: Firestore) { }
 
   async upload(file: File): Promise<any> {
       const prefix = 'drafts/'
@@ -26,7 +28,19 @@ export class UploadPictureService {
     for(let image of images) {
       const storageRef = ref(this.storage, prefix+image.filename);
       await uploadBytesResumable(storageRef, image.file);
+      await this.saveInDatabase(image);
     }
+  }
+
+  private async saveInDatabase(image: UploadValue) {
+    const doc: Picture = {
+      country: image.country,
+      thumbnail: image.thumbnail,
+      filename: image.filename,
+      image: image.image,
+      tags: image.tags
+    }
+    await addDoc(collection(this.firestore, 'pictures'), doc);
   }
 
   private getFileNameWithoutExtension(filename: string) {
