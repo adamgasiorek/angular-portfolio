@@ -1,0 +1,14 @@
+@if(parentFormGroup) {
+  <mat-form-field [formGroup]="parentFormGroup">
+    <mat-label>Country</mat-label>
+    <input type="text"
+           matInput
+           formControlName="country"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete"  >
+      @for (option of filteredOptions | async; track $index) {
+        <mat-option [value]="option">{{option}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+}

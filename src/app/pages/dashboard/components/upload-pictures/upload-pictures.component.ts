@@ -1,15 +1,24 @@
 import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
-import {UploadBoxComponent} from "./upload-box/upload-box.component";
+import {UploadBoxComponent} from "./components/upload-box/upload-box.component";
 import {ref, uploadBytesResumable, Storage, getDownloadURL} from "@angular/fire/storage";
-import {AsyncPipe} from "@angular/common";
-import {UploadPicturesLoadingComponent} from "./upload-pictures-loading/upload-pictures-loading.component";
-
-interface UploadPicture {
-  file: File;
-  loading: boolean;
-  image: string;
-  thumbnail: string;
-}
+import {AsyncPipe, JsonPipe, NgClass} from "@angular/common";
+import {UploadPicturesLoadingComponent} from "./components/upload-pictures-loading/upload-pictures-loading.component";
+import {UploadPictureService} from "./services/upload-picture.service";
+import {UploadPicturePreviewComponent} from "./components/upload-picture-preview/upload-picture-preview.component";
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from "@angular/forms";
+import {MatAutocompleteTrigger} from "@angular/material/autocomplete";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {minLengthArray} from "../../../../utils/min-length-formarray";
+import {UploadValue} from "./models/upload-value";
 
 @Component({
   selector: 'app-upload-pictures',
@@ -17,48 +26,74 @@ interface UploadPicture {
   imports: [
     UploadBoxComponent,
     AsyncPipe,
-    UploadPicturesLoadingComponent
+    UploadPicturesLoadingComponent,
+    JsonPipe,
+    UploadPicturePreviewComponent,
+    FormsModule,
+    MatAutocompleteTrigger,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    NgClass
+  ],
+  providers: [
+    UploadPictureService
   ],
   templateUrl: './upload-pictures.component.html',
   styleUrl: './upload-pictures.component.scss'
 })
 export class UploadPicturesComponent {
-  images: Array<UploadPicture> = [];
+  picturesForm = this.formBuilder.group({
+    saveLoading: [false],
+    folder: ['', Validators.required],
+    pictures: this.formBuilder.array([], minLengthArray(1)),
+  });
 
-  constructor(private storage: Storage) {
+  constructor(private formBuilder: FormBuilder,
+              private uploadPictureService: UploadPictureService) {
   }
 
   async onFilesSelected(files: File[]) {
-    let index = 0;
-    for (const file of files) {
-      if (file) {
-        const prefix = 'drafts/'
-        const storageRef = ref(this.storage, prefix+file.name);
-        this.images.push({image: '', thumbnail: '', loading: true, file});
-        const response = await uploadBytesResumable(storageRef, file);
-        const image = await getDownloadURL(response.ref);
-        setTimeout(async () => {
-          const thumbnailRef = ref(this.storage, prefix+this.getFileNameWithoutExtension(file.name) + '_400x400.webp');
-          const thumbnail = await getDownloadURL(thumbnailRef);
-          this.images[index] = ({image, thumbnail, loading: false, file: this.images[index].file});
-          index++;
-        }, 4000);
-      }
-    }
+    files.forEach(async (file, index) => {
+      this.addPicture();
+      let response = await this.uploadPictureService.upload(file);
+      this.updatePicture({data: response, index});
+    })
   }
 
   async save() {
-    for(let image of this.images) {
-      const prefix = 'prod/'
-      const storageRef = ref(this.storage, prefix+image.file.name);
-      await uploadBytesResumable(storageRef, image.file);
-    }
+    this.picturesForm.patchValue({saveLoading: true});
+    await this.uploadPictureService.save(this.picturesForm.value.pictures as Array<UploadValue>, this.picturesForm.value.folder as string);
+    this.picturesForm.reset();
+    (this.picturesForm.get('pictures') as FormArray).clear();
   }
 
-  getFileNameWithoutExtension(filename: string) {
-    const parts = filename.split('.');
-    parts.pop();
-    return parts.join('.');
+
+  addPicture() {
+    this.pictures.push(
+      this.formBuilder.nonNullable.group({
+        filename: ['', Validators.required],
+        file: [null, Validators.required],
+        loading: [true, []],
+        image: ['', []],
+        thumbnail: ['', []],
+        tags: [[], []],
+        country: ['', [Validators.required]]
+      })
+    );
   }
 
+  updatePicture(params: {index: number, data: any}) {
+    this.pictures.at(params.index).patchValue({
+      loading: false,
+      ...params.data
+    })
+  }
+
+  get pictures() {
+    return this.picturesForm.get('pictures') as FormArray;
+  }
+
+  getFormGroup(control: AbstractControl) { return control as FormGroup; }
 }
