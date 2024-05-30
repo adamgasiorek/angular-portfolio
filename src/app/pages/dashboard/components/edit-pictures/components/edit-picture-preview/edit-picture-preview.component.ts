@@ -5,6 +5,7 @@ import {SelectCountryComponent} from "../../../forms/select-country/select-count
 import {SelectTagsComponent} from "../../../forms/select-tags/select-tags.component";
 import {JsonPipe, NgClass} from "@angular/common";
 import {EditPictureService} from "../../services/edit-picture.service";
+import {deleteObject, ref,} from "@angular/fire/storage";
 
 @Component({
   selector: 'app-edit-picture-preview',
@@ -32,6 +33,7 @@ export class EditPicturePreviewComponent implements AfterViewInit {
     this.pictureForm = this.formBuilder.nonNullable.group({
       imageId: [this.picture.imageId, [Validators.required]],
       saveLoading: [false],
+      removeLoading: [false],
       tags: [this.picture.tags, []],
       country: [this.picture.country, [Validators.required]]
     });
@@ -42,5 +44,10 @@ export class EditPicturePreviewComponent implements AfterViewInit {
     this.pictureForm!.patchValue({saveLoading: true});
     await this.editPictureService.editPicture(this.pictureForm!.value);
     this.pictureForm!.patchValue({saveLoading: false});
+  }
+
+  async remove(event: any) {
+    event.preventDefault();
+    await this.editPictureService.removePicture(this.pictureForm!.value.imageId, this.picture.filename);
   }
 }

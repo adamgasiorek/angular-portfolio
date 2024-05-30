@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/storage";
+import {getDownloadURL, ref, Storage, uploadBytesResumable, } from "@angular/fire/storage";
 import {UploadValue} from "../models/upload-value";
 import {addDoc, collection, Firestore} from "@angular/fire/firestore";
 import {Picture} from "../models/picture";
 import {timeout} from "../../../../../utils/timeout";
+import {getFileNameWithoutExtension} from "../../../../../utils/get-file-name";
 
 
 
@@ -18,7 +19,7 @@ export class UploadPictureService {
       const response = await uploadBytesResumable(storageRef, file);
       const image = await getDownloadURL(response.ref);
       await timeout(6000);
-      const thumbnailRef = ref(this.storage, prefix+this.getFileNameWithoutExtension(file.name) + '_400x400.webp');
+      const thumbnailRef = ref(this.storage, prefix+getFileNameWithoutExtension(file.name) + '_400x400.webp');
       const thumbnail = await getDownloadURL(thumbnailRef);
       return {image, thumbnail, filename: file.name, file};
   }
@@ -29,26 +30,21 @@ export class UploadPictureService {
     for(let image of images) {
       const storageRef = ref(this.storage, prefix+image.filename);
       await uploadBytesResumable(storageRef, image.file);
-      await this.saveInDatabase(image);
+      await this.saveInDatabase(image, prefix);
     }
   }
 
-  private async saveInDatabase(image: UploadValue) {
+  private async saveInDatabase(image: UploadValue,prefix: string) {
     const doc: Picture = {
       country: image.country,
       thumbnail: image.thumbnail,
-      filename: image.filename,
+      filename: prefix+image.filename,
       image: image.image,
       tags: image.tags
     }
     await addDoc(collection(this.firestore, 'pictures'), doc);
   }
 
-  private getFileNameWithoutExtension(filename: string) {
-    const parts = filename.split('.');
-    parts.pop();
-    return parts.join('.');
-  }
 
   private checkFolderName(folder: string) {
     if (folder.slice(-1) !== '/') {

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/storage";
-import {addDoc, doc, collection, Firestore, updateDoc} from "@angular/fire/firestore";
+import {deleteObject, getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/storage";
+import {addDoc, doc, collection, Firestore, updateDoc, deleteDoc} from "@angular/fire/firestore";
 import {Picture} from "../../upload-pictures/models/picture";
+import {getFileNameWithoutExtension} from "../../../../../utils/get-file-name";
 
 @Injectable()
 export class EditPictureService {
@@ -16,4 +17,9 @@ export class EditPictureService {
     await updateDoc(doc(this.firestore, 'pictures/'+image.imageId), picture);
   }
 
+  async removePicture(imageId: string, filename: string) {
+    await deleteDoc(doc(this.firestore, 'pictures/'+imageId));
+    await deleteObject(ref(this.storage, filename));
+    await deleteObject(ref(this.storage, getFileNameWithoutExtension(filename) + '_400x400.webp'));
+  }
 }
