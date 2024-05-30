@@ -1,1 +1,17 @@
-<p>edit-pictures works!</p>
+<!--{{pictures | async | json}}-->
+<div class="flex flex-col gap-4 py-4">
+  @if(pictures | async) {
+    @for (picture of (pictures | async); track $index) {
+      <div class="square">
+        <div class="content">
+          <app-edit-picture-preview [picture]="picture">
+          </app-edit-picture-preview>
+        </div>
+      </div>
+    }
+  } @else {
+    <p>Loading...</p>
+  }
+
+
+</div>

@@ -3,6 +3,7 @@ import {getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/
 import {UploadValue} from "../models/upload-value";
 import {addDoc, collection, Firestore} from "@angular/fire/firestore";
 import {Picture} from "../models/picture";
+import {timeout} from "../../../../../utils/timeout";
 
 
 
@@ -16,7 +17,7 @@ export class UploadPictureService {
       const storageRef = ref(this.storage, prefix+file.name);
       const response = await uploadBytesResumable(storageRef, file);
       const image = await getDownloadURL(response.ref);
-      setTimeout(async () => {}, 4000);
+      await timeout(6000);
       const thumbnailRef = ref(this.storage, prefix+this.getFileNameWithoutExtension(file.name) + '_400x400.webp');
       const thumbnail = await getDownloadURL(thumbnailRef);
       return {image, thumbnail, filename: file.name, file};

@@ -7,8 +7,8 @@ import {AsyncPipe, CommonModule, JsonPipe} from "@angular/common";
 import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
 import {MatInput} from "@angular/material/input";
-import {SelectCountryComponent} from "../select-country/select-country.component";
-import {SelectTagsComponent} from "../select-tags/select-tags.component";
+import {SelectCountryComponent} from "../../../forms/select-country/select-country.component";
+import {SelectTagsComponent} from "../../../forms/select-tags/select-tags.component";
 
 @Component({
   selector: 'app-upload-pictures-loading',

@@ -1,8 +1,8 @@
 import {Component, Input, output} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
-import {SelectCountryComponent} from "../select-country/select-country.component";
-import {SelectTagsComponent} from "../select-tags/select-tags.component";
+import {SelectCountryComponent} from "../../../forms/select-country/select-country.component";
+import {SelectTagsComponent} from "../../../forms/select-tags/select-tags.component";
 
 @Component({
   selector: 'app-upload-picture-preview',

@@ -40,8 +40,7 @@ import {UploadValue} from "./models/upload-value";
   providers: [
     UploadPictureService
   ],
-  templateUrl: './upload-pictures.component.html',
-  styleUrl: './upload-pictures.component.scss'
+  templateUrl: './upload-pictures.component.html'
 })
 export class UploadPicturesComponent {
   picturesForm = this.formBuilder.group({

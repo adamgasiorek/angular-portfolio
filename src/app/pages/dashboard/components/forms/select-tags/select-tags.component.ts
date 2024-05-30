@@ -3,7 +3,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {tags} from "../../../../../../data/tags";
+import {tags} from "../../../../../data/tags";
 
 @Component({
   selector: 'app-select-tags',

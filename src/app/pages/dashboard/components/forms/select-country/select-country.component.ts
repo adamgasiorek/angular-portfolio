@@ -5,7 +5,7 @@ import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from "@angular/mater
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {map, Observable, startWith} from "rxjs";
-import {countries} from "../../../../../../data/countries";
+import {countries} from "../../../../../data/countries";
 
 @Component({
   selector: 'app-select-country',
