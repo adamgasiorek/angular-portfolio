@@ -1,0 +1,26 @@
+import {Component, Input, output} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {JsonPipe} from "@angular/common";
+import {SelectCountryComponent} from "../select-country/select-country.component";
+import {SelectTagsComponent} from "../select-tags/select-tags.component";
+
+@Component({
+  selector: 'app-upload-picture-preview',
+  standalone: true,
+  imports: [
+    FormsModule,
+    JsonPipe,
+    SelectCountryComponent,
+    SelectTagsComponent,
+    ReactiveFormsModule
+  ],
+  templateUrl: './upload-picture-preview.component.html'
+})
+export class UploadPicturePreviewComponent {
+  @Input() parentFormGroup: FormGroup | undefined;
+
+
+  constructor(private formBuilder: FormBuilder) {
+
+  }
+}

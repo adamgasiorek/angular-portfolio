@@ -1,0 +1,19 @@
+<div class="flex flex-row gap-4">
+  <div class="flex h-64 w-64 relative">
+    <img [src]="parentFormGroup!.value?.thumbnail" />
+  </div>
+  <div class="flex flex-col gap-4 h-64 w-64 relative">
+    <div class="flex flex-col w-64 relative">
+
+
+      <div [formGroup]="parentFormGroup!">
+
+        <app-select-tags [parentFormGroup]="parentFormGroup"></app-select-tags>
+        <app-select-country [parentFormGroup]="parentFormGroup"></app-select-country>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
