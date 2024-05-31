@@ -1,23 +1,18 @@
 <!--<p>dashboard works!</p>-->
 <!--<button (click)="logout()">Logout</button>-->
 <div class="bg-gray-100 flex h-screen flex-col">
+  <!-- Navbar -->
+  <app-header></app-header>
 
-<!-- Navbar -->
-<app-header></app-header>
-
-<!-- Main Content -->
-<div class="flex-grow py-10">
-  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full">
-    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
-
-
+  <!-- Main Content -->
+  <div class="flex-grow py-10">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-full">
+      <div
+        class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 h-full flex flex-col">
         <div class="relative mt-4">
           <router-outlet></router-outlet>
         </div>
-
-
+      </div>
     </div>
   </div>
-</div>
-
 </div>

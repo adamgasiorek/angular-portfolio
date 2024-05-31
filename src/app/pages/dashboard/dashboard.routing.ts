@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import {DashboardComponent} from "./dashboard.component";
-import {UploadPicturesComponent} from "./components/upload-pictures/upload-pictures.component";
-import {EditPicturesComponent} from "./components/edit-pictures/edit-pictures.component";
+import { DashboardComponent } from './dashboard.component';
+import { UploadPicturesComponent } from './components/upload-pictures/upload-pictures.component';
+import { EditPicturesComponent } from './components/edit-pictures/edit-pictures.component';
 
 export const dashboardRouting: Routes = [
   {
@@ -15,12 +15,12 @@ export const dashboardRouting: Routes = [
       },
       {
         path: 'create',
-        component: UploadPicturesComponent
+        component: UploadPicturesComponent,
       },
       {
         path: 'edit',
-        component: EditPicturesComponent
+        component: EditPicturesComponent,
       },
-    ]
-  }
+    ],
+  },
 ];

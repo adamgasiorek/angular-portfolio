@@ -1,25 +1,32 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-upload-box',
   standalone: true,
-  imports: [
-    DragDropModule,
-  ],
+  imports: [DragDropModule],
   templateUrl: './upload-box.component.html',
-  styleUrl: './upload-box.component.scss'
+  styleUrl: './upload-box.component.scss',
 })
 export class UploadBoxComponent {
+  private _isDragging = false;
 
-  private _isDragging: boolean = false;
+  constructor() {}
 
-  constructor() { }
-
-  @ViewChild('fileSelector', {static: true}) public fileSelector: ElementRef | any;
+  @ViewChild('fileSelector', { static: true }) public fileSelector:
+    | ElementRef
+    | any;
   @Output() public selectedFiles = new EventEmitter<File[]>();
 
-  public get isDragging(): boolean { return this._isDragging; }
+  public get isDragging(): boolean {
+    return this._isDragging;
+  }
 
   public onDrop(event: any): void {
     // Stop browser opening the file
@@ -72,9 +79,7 @@ export class UploadBoxComponent {
     event.stopPropagation();
   }
 
-
   private emitFiles(files: File[]): void {
     this.selectedFiles.emit(files);
   }
-
 }

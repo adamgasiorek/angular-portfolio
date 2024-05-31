@@ -2,7 +2,7 @@
   <mat-label>Tags</mat-label>
   <mat-select formControlName="tags" multiple>
     @for (topping of toppingList; track topping) {
-      <mat-option [value]="topping">{{topping}}</mat-option>
+      <mat-option [value]="topping">{{ topping }}</mat-option>
     }
   </mat-select>
 </mat-form-field>

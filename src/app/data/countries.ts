@@ -1,4 +1,4 @@
-export const countries: Array<any> = [
+export const countries: any[] = [
   {
     name: 'Andorra',
     code: 'AD',

@@ -1,7 +1,7 @@
 export interface Picture {
   country: string;
   filename: string;
-  tags: Array<string>;
+  tags: string[];
   image: string;
   thumbnail: string;
 }

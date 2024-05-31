@@ -1,11 +1,20 @@
-import {Component, Input} from '@angular/core';
-import {AsyncPipe} from "@angular/common";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from "@angular/material/autocomplete";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {map, Observable, startWith} from "rxjs";
-import {countries} from "../../../../../data/countries";
+import { Component, Input } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  MatAutocomplete,
+  MatAutocompleteTrigger,
+  MatOption,
+} from '@angular/material/autocomplete';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { map, Observable, startWith } from 'rxjs';
+import { countries } from '../../../../../data/countries';
 
 @Component({
   selector: 'app-select-country',
@@ -19,9 +28,9 @@ import {countries} from "../../../../../data/countries";
     MatInput,
     MatLabel,
     MatOption,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  templateUrl: './select-country.component.html'
+  templateUrl: './select-country.component.html',
 })
 export class SelectCountryComponent {
   @Input() parentFormGroup: FormGroup | undefined;
@@ -34,14 +43,15 @@ export class SelectCountryComponent {
   constructor() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map(value => this._filter(value || ''))
     );
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter(option =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
-
 }

@@ -4,16 +4,11 @@
   </div>
   <div class="flex flex-col gap-4 h-64 w-64 relative">
     <div class="flex flex-col w-64 relative">
-
-
       <div [formGroup]="parentFormGroup!">
-
         <app-select-tags [parentFormGroup]="parentFormGroup"></app-select-tags>
-        <app-select-country [parentFormGroup]="parentFormGroup"></app-select-country>
-
+        <app-select-country
+          [parentFormGroup]="parentFormGroup"></app-select-country>
       </div>
-
     </div>
-
   </div>
 </div>

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import {Auth, authState, signOut, User} from "@angular/fire/auth";
-import {Router, RouterOutlet} from "@angular/router";
-import {AsyncPipe, JsonPipe} from "@angular/common";
-import {EMPTY, Observable} from "rxjs";
-import {HeaderComponent} from "./components/header/header.component";
-import {UploadPicturesComponent} from "./components/upload-pictures/upload-pictures.component";
+import { RouterOutlet } from '@angular/router';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { HeaderComponent } from './components/header/header.component';
+import { UploadPicturesComponent } from './components/upload-pictures/upload-pictures.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,12 +12,9 @@ import {UploadPicturesComponent} from "./components/upload-pictures/upload-pictu
     JsonPipe,
     HeaderComponent,
     UploadPicturesComponent,
-    RouterOutlet
+    RouterOutlet,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
-export class DashboardComponent {
-
-
-}
+export class DashboardComponent {}

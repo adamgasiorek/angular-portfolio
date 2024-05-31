@@ -1,11 +1,11 @@
-export const tags: Array<any> = [
+export const tags: any[] = [
   {
-    name: 'Nature'
+    name: 'Nature',
   },
   {
-    name: 'Sightseeing'
+    name: 'Sightseeing',
   },
   {
-    name: 'Couple'
-  }
-]
+    name: 'Couple',
+  },
+];

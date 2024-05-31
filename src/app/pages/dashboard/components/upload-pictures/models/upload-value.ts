@@ -4,6 +4,6 @@ export interface UploadValue {
   filename: string;
   image: string;
   loading: boolean;
-  tags: Array<string>;
+  tags: string[];
   thumbnail: string;
 }
