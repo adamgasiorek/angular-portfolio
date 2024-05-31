@@ -1,4 +1,8 @@
-<!--{{pictures | async | json}}-->
+<form [formGroup]="pictureForm!">
+  <app-select-country [parentFormGroup]="pictureForm"></app-select-country>
+</form>
+
+
 <div class="flex flex-col gap-4 py-4">
   @if(pictures | async) {
     @for (picture of (pictures | async); track $index) {
