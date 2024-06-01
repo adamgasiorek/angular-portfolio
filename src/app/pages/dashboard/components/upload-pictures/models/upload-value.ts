@@ -5,5 +5,6 @@ export interface UploadValue {
   image: string;
   loading: boolean;
   tags: string[];
+  private: boolean;
   thumbnail: string;
 }

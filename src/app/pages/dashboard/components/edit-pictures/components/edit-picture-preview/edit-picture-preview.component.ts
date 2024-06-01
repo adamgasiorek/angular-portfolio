@@ -14,6 +14,7 @@ import { SelectCountryComponent } from '../../../forms/select-country/select-cou
 import { SelectTagsComponent } from '../../../forms/select-tags/select-tags.component';
 import { JsonPipe, NgClass } from '@angular/common';
 import { EditPictureService } from '../../services/edit-picture.service';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-edit-picture-preview',
@@ -24,6 +25,7 @@ import { EditPictureService } from '../../services/edit-picture.service';
     JsonPipe,
     ReactiveFormsModule,
     NgClass,
+    MatSlideToggle,
   ],
   providers: [EditPictureService],
   templateUrl: './edit-picture-preview.component.html',
@@ -43,6 +45,7 @@ export class EditPicturePreviewComponent implements AfterViewInit {
       imageId: [this.picture.imageId, [Validators.required]],
       saveLoading: [false],
       removeLoading: [false],
+      private: [false],
       tags: [this.picture.tags, []],
       country: [this.picture.country, [Validators.required]],
     });

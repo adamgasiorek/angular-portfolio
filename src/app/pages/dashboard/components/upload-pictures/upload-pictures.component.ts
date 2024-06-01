@@ -1,8 +1,5 @@
-import {
-  Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { UploadBoxComponent } from './components/upload-box/upload-box.component';
-
 
 import { AsyncPipe, JsonPipe, NgClass } from '@angular/common';
 import { UploadPicturesLoadingComponent } from './components/upload-pictures-loading/upload-pictures-loading.component';
@@ -82,6 +79,7 @@ export class UploadPicturesComponent {
         image: ['', []],
         thumbnail: ['', []],
         tags: [[], []],
+        private: [false, []],
         country: ['', [Validators.required]],
       })
     );

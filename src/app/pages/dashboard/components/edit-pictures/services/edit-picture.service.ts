@@ -1,15 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  deleteObject,
-  ref,
-  Storage,
-} from '@angular/fire/storage';
-import {
-  doc,
-  Firestore,
-  updateDoc,
-  deleteDoc,
-} from '@angular/fire/firestore';
+import { deleteObject, ref, Storage } from '@angular/fire/storage';
+import { doc, Firestore, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { getFileNameWithoutExtension } from '../../../../../utils/get-file-name';
 
 @Injectable()
@@ -21,6 +12,7 @@ export class EditPictureService {
 
   async editPicture(image: any) {
     const picture = {
+      private: image.private,
       country: image.country,
       tags: image.tags,
     };

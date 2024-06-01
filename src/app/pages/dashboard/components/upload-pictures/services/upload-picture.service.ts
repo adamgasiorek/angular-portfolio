@@ -43,6 +43,7 @@ export class UploadPictureService {
 
   private async saveInDatabase(image: UploadValue, prefix: string) {
     const doc: Picture = {
+      private: image.private,
       country: image.country,
       thumbnail: image.thumbnail,
       filename: prefix + image.filename,

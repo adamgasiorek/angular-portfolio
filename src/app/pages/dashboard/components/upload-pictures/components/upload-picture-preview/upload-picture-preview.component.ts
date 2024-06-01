@@ -8,6 +8,7 @@ import {
 import { JsonPipe } from '@angular/common';
 import { SelectCountryComponent } from '../../../forms/select-country/select-country.component';
 import { SelectTagsComponent } from '../../../forms/select-tags/select-tags.component';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-upload-picture-preview',
@@ -18,6 +19,7 @@ import { SelectTagsComponent } from '../../../forms/select-tags/select-tags.comp
     SelectCountryComponent,
     SelectTagsComponent,
     ReactiveFormsModule,
+    MatSlideToggle,
   ],
   templateUrl: './upload-picture-preview.component.html',
 })
