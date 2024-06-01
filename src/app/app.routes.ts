@@ -10,14 +10,11 @@ const redirectLoggedInToItems = () => redirectLoggedInTo(['dashboard']);
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'auth',
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToItems },
     loadChildren: () =>
-      import('./pages/home/home.module').then(s => s.HomeModule),
-  },
-  {
-    path: 'private',
-    loadChildren: () =>
-      import('./pages/private/private.module').then(s => s.PrivateModule),
+      import('./pages/auth/auth.module').then(s => s.AuthModule),
   },
   {
     path: 'dashboard',
@@ -27,10 +24,8 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.module').then(s => s.DashboardModule),
   },
   {
-    path: 'auth',
-    canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToItems },
+    path: '',
     loadChildren: () =>
-      import('./pages/auth/auth.module').then(s => s.AuthModule),
+      import('./pages/home/home.module').then(s => s.HomeModule),
   },
 ];

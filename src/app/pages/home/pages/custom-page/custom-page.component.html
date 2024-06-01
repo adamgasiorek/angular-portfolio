@@ -1,0 +1,5 @@
+@if ((post$ | async).length === 0) {
+  no pictures with this filters
+} @else {
+  {{post$ | async | json}}
+}
