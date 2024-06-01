@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Input,
+} from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import {
   FormControl,
@@ -32,19 +37,24 @@ import { countries } from '../../../../../data/countries';
   ],
   templateUrl: './select-country.component.html',
 })
-export class SelectCountryComponent {
+export class SelectCountryComponent implements AfterViewInit {
   @Input() parentFormGroup: FormGroup | undefined;
 
   myControl = new FormControl('');
 
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<string[]> | undefined;
   options = countries.map(item => item.name);
 
-  constructor() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    this.filteredOptions = this.parentFormGroup!.get(
+      'country'
+    )!.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || ''))
     );
+    this.cdr.detectChanges();
   }
 
   private _filter(value: string): string[] {

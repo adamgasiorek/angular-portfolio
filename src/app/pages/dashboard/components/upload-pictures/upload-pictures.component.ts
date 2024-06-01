@@ -19,6 +19,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { minLengthArray } from '../../../../utils/min-length-formarray';
 import { UploadValue } from './models/upload-value';
+import { SelectCountryComponent } from '../forms/select-country/select-country.component';
 
 @Component({
   selector: 'app-upload-pictures',
@@ -36,6 +37,7 @@ import { UploadValue } from './models/upload-value';
     MatLabel,
     ReactiveFormsModule,
     NgClass,
+    SelectCountryComponent,
   ],
   providers: [UploadPictureService],
   templateUrl: './upload-pictures.component.html',
@@ -45,6 +47,10 @@ export class UploadPicturesComponent {
     saveLoading: [false],
     folder: ['', Validators.required],
     pictures: this.formBuilder.array([], minLengthArray(1)),
+  });
+
+  saveToAllForm = this.formBuilder.group({
+    country: ['Andorra', [Validators.required]],
   });
 
   constructor(
@@ -98,5 +104,19 @@ export class UploadPicturesComponent {
 
   getFormGroup(control: AbstractControl) {
     return control as FormGroup;
+  }
+
+  saveToAll() {
+    console.log('saveToAll', this.saveToAllForm.value.country);
+
+    this.pictures.controls.forEach(picture => {
+      picture.patchValue({
+        country: this.saveToAllForm.value.country,
+      });
+    });
+    // this.pictures.controls at(params.index).patchValue({
+    //   loading: false,
+    //   ...params.data,
+    // });
   }
 }

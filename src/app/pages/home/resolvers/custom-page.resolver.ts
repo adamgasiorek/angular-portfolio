@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { capitalize } from '../../../utils/capitalize';
 
 export const customPageResolver: ResolveFn<Observable<any[]>> = async (
   route,
@@ -49,7 +50,7 @@ const getData = (firestore: any, filterCountry: any): any => {
     collectionData(
       query(
         collection(firestore, 'pictures'),
-        where('country', '==', filterCountry)
+        where('country', '==', capitalize(filterCountry))
       ),
       { idField: 'imageId' }
     )

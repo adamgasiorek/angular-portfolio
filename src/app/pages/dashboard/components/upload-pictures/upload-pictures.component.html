@@ -36,6 +36,20 @@
 
   <app-upload-box (selectedFiles)="onFilesSelected($event)"></app-upload-box>
 
+  <div class="flex flex-row mt-4">
+    <p>Save to all</p>
+    <form class="flex flex-row" [formGroup]="saveToAllForm" (ngSubmit)="saveToAll()">
+      <div class="flex flex-row gap-4 items-center justify-between">
+        <app-select-country
+          [parentFormGroup]="saveToAllForm"></app-select-country>
+      </div>
+      <button>
+        Save
+      </button>
+    </form>
+  </div>
+
+
   <div class="flex flex-col gap-4 py-4" formArrayName="pictures">
     @for (picture of pictures.controls; track $index) {
       <div class="square">
