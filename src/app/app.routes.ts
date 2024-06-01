@@ -15,6 +15,11 @@ export const routes: Routes = [
       import('./pages/home/home.module').then(s => s.HomeModule),
   },
   {
+    path: 'private',
+    loadChildren: () =>
+      import('./pages/private/private.module').then(s => s.PrivateModule),
+  },
+  {
     path: 'dashboard',
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
