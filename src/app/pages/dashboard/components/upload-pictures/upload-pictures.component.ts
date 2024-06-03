@@ -86,6 +86,7 @@ export class UploadPicturesComponent {
         thumbnail: ['', []],
         tags: [[], []],
         private: [false, []],
+        isVideo: [false, []],
         country: ['', [Validators.required]],
       })
     );
@@ -94,6 +95,7 @@ export class UploadPicturesComponent {
   updatePicture(params: { index: number; data: any }) {
     this.pictures.at(params.index).patchValue({
       loading: false,
+      isVideo: params.data.file.type === 'video/mp4',
       ...params.data,
     });
   }
@@ -107,16 +109,10 @@ export class UploadPicturesComponent {
   }
 
   saveToAll() {
-    console.log('saveToAll', this.saveToAllForm.value.country);
-
     this.pictures.controls.forEach(picture => {
       picture.patchValue({
         country: this.saveToAllForm.value.country,
       });
     });
-    // this.pictures.controls at(params.index).patchValue({
-    //   loading: false,
-    //   ...params.data,
-    // });
   }
 }

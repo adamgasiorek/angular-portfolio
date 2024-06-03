@@ -10,6 +10,7 @@ import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 import { Picture } from '../models/picture';
 import { timeout } from '../../../../../utils/timeout';
 import { getFileNameWithoutExtension } from '../../../../../utils/get-file-name';
+import { getIconPath } from '../../../../../utils/get-icon-path';
 
 @Injectable()
 export class UploadPictureService {
@@ -26,7 +27,7 @@ export class UploadPictureService {
     await timeout(6000);
     const thumbnailRef = ref(
       this.storage,
-      prefix + getFileNameWithoutExtension(file.name) + '_400x400.webp'
+      getIconPath(prefix + getFileNameWithoutExtension(file.name))
     );
     const thumbnail = await getDownloadURL(thumbnailRef);
     return { image, thumbnail, filename: file.name, file };
@@ -49,6 +50,7 @@ export class UploadPictureService {
       filename: prefix + image.filename,
       image: image.image,
       tags: image.tags,
+      isVideo: image.isVideo,
     };
     await addDoc(collection(this.firestore, 'pictures'), doc);
   }

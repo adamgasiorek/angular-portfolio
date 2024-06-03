@@ -1,5 +1,6 @@
 @if ((post$ | async).length === 0) {
   no pictures with this filters
 } @else {
+  <app-gallery [images]="post$ | async"></app-gallery>
   {{post$ | async | json}}
 }

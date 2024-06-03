@@ -1,0 +1,26 @@
+<div class="gallery">
+  @for(image of images; let i = $index;track i) {
+    <div class="thumb" (click)="open(i)">
+      <img [src]="image.thumbnail" alt="Image thumbnail">
+    </div>
+  }
+</div>
+
+@if(currentIndex !== null) {
+  <div class="lightbox" (click)="close()">
+    <div class="lightbox-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="close()">&times;</span>
+        @if(images[currentIndex].isVideo) {
+          <video class="lightbox-video" controls>
+            <source [src]="images[currentIndex]?.image" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        } @else {
+          <img alt="" [src]="images[currentIndex].image" class="lightbox-image" />
+        }
+        <a class="prev" (click)="prev()">&#10094;</a>
+        <a class="next" (click)="next()">&#10095;</a>
+    </div>
+  </div>
+
+}

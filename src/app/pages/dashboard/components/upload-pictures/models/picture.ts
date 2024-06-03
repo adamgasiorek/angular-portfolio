@@ -1,4 +1,5 @@
 export interface Picture {
+  isVideo: boolean;
   private: boolean;
   country: string;
   filename: string;

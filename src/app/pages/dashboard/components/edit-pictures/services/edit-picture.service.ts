@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { deleteObject, ref, Storage } from '@angular/fire/storage';
 import { doc, Firestore, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { getFileNameWithoutExtension } from '../../../../../utils/get-file-name';
+import { getIconPath } from '../../../../../utils/get-icon-path';
 
 @Injectable()
 export class EditPictureService {
@@ -23,7 +24,7 @@ export class EditPictureService {
     await deleteDoc(doc(this.firestore, 'pictures/' + imageId));
     await deleteObject(ref(this.storage, filename));
     await deleteObject(
-      ref(this.storage, getFileNameWithoutExtension(filename) + '_400x400.webp')
+      ref(this.storage, getIconPath(getFileNameWithoutExtension(filename)))
     );
   }
 }
