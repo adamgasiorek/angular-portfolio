@@ -23,13 +23,7 @@ export const customMainResolver: ResolveFn<Observable<any[]>> = async (
     router.navigate(['/', 'not-found']);
     return;
   }
-  if (pageData.private) {
-    const isLogged = auth.currentUser !== null;
-    if (!isLogged) {
-      router.navigate(['/', 'auth']);
-      return;
-    }
-  }
+
   return getData(firestore, pageData.filterCountry);
 };
 
