@@ -3,12 +3,12 @@ import { Auth, signOut } from '@angular/fire/auth';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-dashboard-nav',
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './header.component.html',
+  templateUrl: './dashboard-nav.component.html',
 })
-export class HeaderComponent {
+export class DashboardNavComponent {
   constructor(
     private auth: Auth,
     private router: Router

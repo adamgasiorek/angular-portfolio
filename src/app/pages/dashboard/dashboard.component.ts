@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { HeaderComponent } from './components/header/header.component';
+import { DashboardNavComponent } from './components/dashboard-nav/dashboard-nav.component';
 import { UploadPicturesComponent } from './components/upload-pictures/upload-pictures.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { UploadPicturesComponent } from './components/upload-pictures/upload-pic
   imports: [
     AsyncPipe,
     JsonPipe,
-    HeaderComponent,
+    DashboardNavComponent,
     UploadPicturesComponent,
     RouterOutlet,
   ],
