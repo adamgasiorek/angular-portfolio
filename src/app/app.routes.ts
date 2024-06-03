@@ -24,6 +24,11 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.module').then(s => s.DashboardModule),
   },
   {
+    path: 'albums',
+    loadChildren: () =>
+      import('./pages/albums/albums.module').then(s => s.AlbumsModule),
+  },
+  {
     path: 'about',
     loadChildren: () =>
       import('./pages/about/about.module').then(s => s.AboutModule),

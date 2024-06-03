@@ -1,2 +1,3 @@
-<p>home works!</p>
-<button [routerLink]="['dashboard']">Go to dashaboard</button>
+@if(post$ | async; as items) {
+  <app-gallery [images]="items"></app-gallery>
+}
