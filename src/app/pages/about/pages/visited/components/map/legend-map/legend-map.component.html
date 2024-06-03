@@ -1,0 +1,54 @@
+<div class="headers">
+  <h4>Visited {{(getCountriesContinentFromCode(list, 'EU').length +
+    getCountriesContinentFromCode(list, 'AS').length +
+    getCountriesContinentFromCode(list, 'AF').length +
+    getCountriesContinentFromCode(list, 'NA').length +
+    getCountriesContinentFromCode(list, 'SA').length)}} / 193</h4>
+</div>
+
+<app-table-row
+  [title]="'Europe'"
+  [nestedMap]="true"
+  [subTitle]="getCountriesContinentFromCode(list, 'EU').length + ' / 45'"
+  [description]="getAllCountriesPerContinent('EU')">
+  <app-europe-map [list]="getCountriesContinentFromCode(list, 'EU')"></app-europe-map>
+</app-table-row>
+
+
+<app-table-row
+  [title]="'Asia'"
+  [subTitle]="getCountriesContinentFromCode(list, 'AS').length + ' / 46'"
+  [description]="getAllCountriesPerContinent('AS')">
+</app-table-row>
+
+<app-table-row
+  [title]="'Africa'"
+  [subTitle]="getCountriesContinentFromCode(list, 'AF').length + ' / 54'"
+  [description]="getAllCountriesPerContinent('AF')">
+</app-table-row>
+
+<app-table-row
+  [title]="'South America'"
+  [subTitle]="getCountriesContinentFromCode(list, 'SA').length + ' / 13'"
+  [description]="getAllCountriesPerContinent('SA')">
+</app-table-row>
+
+
+<app-table-row
+  [title]="'North America'"
+  [subTitle]="getCountriesContinentFromCode(list, 'NA').length + ' / 22'"
+  [description]="getAllCountriesPerContinent('NA')">
+</app-table-row>
+
+<app-table-row
+  [title]="'Oceania'"
+  [subTitle]="getCountriesContinentFromCode(list, 'OC').length + ' / 14'"
+  [description]="getAllCountriesPerContinent('OC')">
+</app-table-row>
+
+
+<span style="font-size: 8px;">
+  https://pl.wikipedia.org/wiki/Lista_pa%C5%84stw_%C5%9Bwiata
+  <br/>
+  https://pl.wikipedia.org/wiki/Lista_pa%C5%84stw_cz%C5%82onkowskich_Organizacji_Narod%C3%B3w_Zjednoczonych
+</span>
