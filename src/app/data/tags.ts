@@ -8,4 +8,7 @@ export const tags: any[] = [
   {
     name: 'Couple',
   },
+  {
+    name: 'Main',
+  },
 ];

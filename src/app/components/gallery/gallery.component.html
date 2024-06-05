@@ -1,6 +1,12 @@
 <div class="gallery">
   @for(image of images; let i = $index;track i) {
-    <div class="thumb" (click)="open(i)">
+    <div class="thumb" [ngClass]="{
+        'tall': image.isTall,
+        'short': !image.isTall
+      }" (click)="open(i)">
+      @if(image.isVideo) {
+        <div class="play">▶</div>
+      }
       <img [src]="image.thumbnail" alt="Image thumbnail">
     </div>
   }

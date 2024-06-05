@@ -18,13 +18,13 @@ export const customMainResolver: ResolveFn<Observable<any[]>> = async (
   auth: Auth = inject(Auth),
   router: Router = inject(Router)
 ) => {
-  const pageData: any = await getPageData(firestore, 'family');
+  const pageData: any = await getPageData(firestore, 'main');
   if (!pageData) {
     router.navigate(['/', 'not-found']);
     return;
   }
 
-  return getData(firestore, pageData.filterCountry);
+  return getData(firestore, pageData.filterTags);
 };
 
 const getPageData = (firestore: any, name: any) => {
@@ -36,12 +36,13 @@ const getPageData = (firestore: any, name: any) => {
   );
 };
 
-const getData = (firestore: any, filterCountry: any): any => {
+const getData = (firestore: any, filterTags: any): any => {
+  console.log(capitalize(filterTags));
   return firstValueFrom(
     collectionData(
       query(
         collection(firestore, 'pictures'),
-        where('country', '==', capitalize(filterCountry))
+        where('tags', 'array-contains', capitalize(filterTags))
       ),
       { idField: 'imageId' }
     )

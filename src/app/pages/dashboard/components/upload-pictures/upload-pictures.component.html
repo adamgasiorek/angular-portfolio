@@ -34,20 +34,25 @@
     </button>
   </div>
 
+  <div  class="flex flex-col mt-4">
+    <p>Filters for all</p>
+
+    <div class="flex flex-row mt-4">
+      <form class="flex flex-row items-center justify-between w-full" [formGroup]="saveToAllForm" (ngSubmit)="saveToAll()">
+        <div class="flex flex-row gap-4 items-center justify-between">
+          <app-select-country
+            [parentFormGroup]="saveToAllForm"></app-select-country>
+        </div>
+        <button class="mb-4 bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium">
+          Save filters
+        </button>
+      </form>
+    </div>
+  </div>
+
   <app-upload-box (selectedFiles)="onFilesSelected($event)"></app-upload-box>
 
-  <div class="flex flex-row mt-4">
-    <p>Save to all</p>
-    <form class="flex flex-row" [formGroup]="saveToAllForm" (ngSubmit)="saveToAll()">
-      <div class="flex flex-row gap-4 items-center justify-between">
-        <app-select-country
-          [parentFormGroup]="saveToAllForm"></app-select-country>
-      </div>
-      <button>
-        Save
-      </button>
-    </form>
-  </div>
+
 
 
   <div class="flex flex-col gap-4 py-4" formArrayName="pictures">

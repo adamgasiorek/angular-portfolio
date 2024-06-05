@@ -20,6 +20,7 @@ import { MatInput } from '@angular/material/input';
 import { minLengthArray } from '../../../../utils/min-length-formarray';
 import { UploadValue } from './models/upload-value';
 import { SelectCountryComponent } from '../forms/select-country/select-country.component';
+import { getAspectRatio } from '../../../../utils/get-aspect-ratio';
 
 @Component({
   selector: 'app-upload-pictures',
@@ -87,15 +88,18 @@ export class UploadPicturesComponent {
         tags: [[], []],
         private: [false, []],
         isVideo: [false, []],
+        isTall: [false, []],
         country: ['', [Validators.required]],
       })
     );
   }
 
-  updatePicture(params: { index: number; data: any }) {
+  async updatePicture(params: { index: number; data: any }) {
+    const aspectRatio = await getAspectRatio(params.data.file);
     this.pictures.at(params.index).patchValue({
       loading: false,
       isVideo: params.data.file.type === 'video/mp4',
+      isTall: aspectRatio < 0.8,
       ...params.data,
     });
   }

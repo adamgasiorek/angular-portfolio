@@ -1,9 +1,16 @@
+:host {
+  display: flex;
+  justify-content: center;
+  background-color: #f8f8f8;
+}
+
 header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #f8f8f8;
+  max-width: 1420px;
 }
 
 header h1 {

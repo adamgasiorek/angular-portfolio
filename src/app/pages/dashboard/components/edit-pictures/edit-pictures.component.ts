@@ -5,6 +5,7 @@ import {
   Firestore,
   query,
   where,
+  and,
 } from '@angular/fire/firestore';
 import { debounceTime, Observable } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
@@ -13,7 +14,6 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { UploadPicturePreviewComponent } from '../upload-pictures/components/upload-picture-preview/upload-picture-preview.component';
 import { UploadPicturesLoadingComponent } from '../upload-pictures/components/upload-pictures-loading/upload-pictures-loading.component';
@@ -46,7 +46,8 @@ export class EditPicturesComponent {
     private firestore: Firestore
   ) {
     this.pictureForm = this.formBuilder.nonNullable.group({
-      country: ['Andorra', [Validators.required]],
+      tags: [[], []],
+      country: ['Andorra', []],
     });
 
     this.setFilters(this.pictureForm.value);
@@ -60,7 +61,18 @@ export class EditPicturesComponent {
     this.pictures = collectionData(
       query(
         collection(this.firestore, 'pictures'),
-        where('country', '==', value.country)
+        and(
+          value.country
+            ? where('country', '==', value.country)
+            : where('image', '>', 'h'),
+          value.tags.length > 0
+            ? where(
+                'tags',
+                'array-contains',
+                value.tags.length > 0 ? value.tags[0] : ''
+              )
+            : where('image', '>', 'h')
+        )
       ),
       { idField: 'imageId' }
     );

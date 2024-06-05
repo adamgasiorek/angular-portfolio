@@ -1,10 +1,12 @@
 import { Component, HostListener, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-gallery',
   standalone: true,
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
+  imports: [NgClass],
 })
 export class GalleryComponent {
   @HostListener('window:keydown', ['$event'])

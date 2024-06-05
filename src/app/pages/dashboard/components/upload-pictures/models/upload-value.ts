@@ -5,6 +5,7 @@ export interface UploadValue {
   image: string;
   loading: boolean;
   isVideo: boolean;
+  isTall: boolean;
   tags: string[];
   private: boolean;
   thumbnail: string;

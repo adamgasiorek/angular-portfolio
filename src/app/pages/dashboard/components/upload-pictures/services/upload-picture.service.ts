@@ -51,6 +51,7 @@ export class UploadPictureService {
       image: image.image,
       tags: image.tags,
       isVideo: image.isVideo,
+      isTall: image.isTall,
     };
     await addDoc(collection(this.firestore, 'pictures'), doc);
   }
