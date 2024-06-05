@@ -1,14 +1,14 @@
 export const tags: any[] = [
   {
-    name: 'Nature',
+    name: 'nature',
   },
   {
-    name: 'Sightseeing',
+    name: 'sightseeing',
   },
   {
-    name: 'Couple',
+    name: 'couple',
   },
   {
-    name: 'Main',
+    name: 'main',
   },
 ];

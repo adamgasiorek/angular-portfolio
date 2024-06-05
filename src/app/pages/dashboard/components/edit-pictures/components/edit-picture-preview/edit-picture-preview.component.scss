@@ -1,0 +1,9 @@
+.inputs > * {
+  flex: 1 1 50%;
+  box-sizing: border-box;
+  padding: 10px;
+
+  > ::ng-deep mat-form-field {
+    width: 100%;
+  }
+}

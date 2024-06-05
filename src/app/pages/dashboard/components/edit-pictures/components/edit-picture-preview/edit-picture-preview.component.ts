@@ -29,6 +29,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
   ],
   providers: [EditPictureService],
   templateUrl: './edit-picture-preview.component.html',
+  styleUrl: './edit-picture-preview.component.scss',
 })
 export class EditPicturePreviewComponent implements AfterViewInit {
   @Input() picture!: any;
@@ -46,7 +47,7 @@ export class EditPicturePreviewComponent implements AfterViewInit {
       saveLoading: [false],
       removeLoading: [false],
       private: [false],
-      tags: [this.picture.tags, []],
+      tags: [[...this.picture.tags], []],
       country: [this.picture.country, [Validators.required]],
     });
     this.cdr.detectChanges();

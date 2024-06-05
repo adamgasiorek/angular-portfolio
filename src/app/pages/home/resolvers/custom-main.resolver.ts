@@ -37,7 +37,6 @@ const getPageData = (firestore: any, name: any) => {
 };
 
 const getData = (firestore: any, filterTags: any): any => {
-  console.log(capitalize(filterTags));
   return firstValueFrom(
     collectionData(
       query(

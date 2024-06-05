@@ -47,7 +47,7 @@ export class EditPicturesComponent {
   ) {
     this.pictureForm = this.formBuilder.nonNullable.group({
       tags: [[], []],
-      country: ['Andorra', []],
+      country: ['', []],
     });
 
     this.setFilters(this.pictureForm.value);
@@ -65,7 +65,7 @@ export class EditPicturesComponent {
           value.country
             ? where('country', '==', value.country)
             : where('image', '>', 'h'),
-          value.tags.length > 0
+          (value.tags ?? []).length > 0
             ? where(
                 'tags',
                 'array-contains',

@@ -1,8 +1,23 @@
 <mat-form-field [formGroup]="parentFormGroup!">
   <mat-label>Tags</mat-label>
-  <mat-select formControlName="tags" multiple>
-    @for (topping of toppingList; track topping) {
-      <mat-option [value]="topping">{{ topping }}</mat-option>
+  <mat-chip-grid #chipGrid
+                 formControlName="tags">
+    @for (tag of tags; track $index) {
+      <mat-chip-row (removed)="remove(tag)">
+        {{tag}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
     }
-  </mat-select>
+  </mat-chip-grid>
+  <input placeholder="New tag..." #fruitInput [formControl]="fruitCtrl"
+         [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+         (matChipInputTokenEnd)="add($event)"/>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    @for (fruit of filteredFruits | async; track fruit) {
+      <mat-option [value]="fruit">{{fruit}}</mat-option>
+    }
+  </mat-autocomplete>
 </mat-form-field>

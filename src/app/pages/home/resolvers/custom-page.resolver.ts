@@ -1,6 +1,7 @@
 import { ResolveFn, Router } from '@angular/router';
 import { firstValueFrom, map, Observable } from 'rxjs';
 import {
+  and,
   collection,
   collectionData,
   Firestore,
@@ -33,7 +34,7 @@ export const customPageResolver: ResolveFn<Observable<any[]>> = async (
       return;
     }
   }
-  return getData(firestore, pageData.filterCountry);
+  return getData(firestore, pageData.filterCountry, pageData.filterTags);
 };
 
 const getPageData = (firestore: any, name: any) => {
@@ -45,12 +46,23 @@ const getPageData = (firestore: any, name: any) => {
   );
 };
 
-const getData = (firestore: any, filterCountry: any): any => {
+const getData = (firestore: any, filterCountry: any, filterTags: any): any => {
   return firstValueFrom(
     collectionData(
       query(
         collection(firestore, 'pictures'),
-        where('country', '==', capitalize(filterCountry))
+        and(
+          filterCountry
+            ? where('country', '==', capitalize(filterCountry))
+            : where('image', '>', 'h'),
+          filterTags.length > 0
+            ? where(
+                'tags',
+                'array-contains',
+                filterTags.length > 0 ? filterTags[0] : ''
+              )
+            : where('image', '>', 'h')
+        )
       ),
       { idField: 'imageId' }
     )
