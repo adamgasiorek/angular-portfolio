@@ -1,3 +1,3 @@
 export function getIconPath(s: string) {
-  return s + '_400x400.jpeg';
+  return s + '_600x600.jpeg';
 }

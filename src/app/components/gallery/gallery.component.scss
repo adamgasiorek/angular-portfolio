@@ -1,15 +1,16 @@
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-rows: 300px;
   gap: 20px;
 }
 
 .thumb {
+  cursor: pointer;
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  padding-bottom: 75%;
 }
 
 .short {
@@ -21,12 +22,11 @@
 }
 
 .thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.2s;
-  min-width: 100%;
-  min-height: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

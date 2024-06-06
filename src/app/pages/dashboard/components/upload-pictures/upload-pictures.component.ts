@@ -21,6 +21,7 @@ import { minLengthArray } from '../../../../utils/min-length-formarray';
 import { UploadValue } from './models/upload-value';
 import { SelectCountryComponent } from '../forms/select-country/select-country.component';
 import { getAspectRatio } from '../../../../utils/get-aspect-ratio';
+import { SelectTagsComponent } from '../forms/select-tags/select-tags.component';
 
 @Component({
   selector: 'app-upload-pictures',
@@ -39,6 +40,7 @@ import { getAspectRatio } from '../../../../utils/get-aspect-ratio';
     ReactiveFormsModule,
     NgClass,
     SelectCountryComponent,
+    SelectTagsComponent,
   ],
   providers: [UploadPictureService],
   templateUrl: './upload-pictures.component.html',
@@ -51,7 +53,8 @@ export class UploadPicturesComponent {
   });
 
   saveToAllForm = this.formBuilder.group({
-    country: ['Andorra', [Validators.required]],
+    tags: [[], []],
+    country: ['', []],
   });
 
   constructor(
@@ -115,6 +118,7 @@ export class UploadPicturesComponent {
   saveToAll() {
     this.pictures.controls.forEach(picture => {
       picture.patchValue({
+        tags: this.saveToAllForm.value.tags,
         country: this.saveToAllForm.value.country,
       });
     });

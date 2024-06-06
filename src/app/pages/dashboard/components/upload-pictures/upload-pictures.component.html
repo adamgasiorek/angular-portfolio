@@ -39,7 +39,9 @@
 
     <div class="flex flex-row mt-4">
       <form class="flex flex-row items-center justify-between w-full" [formGroup]="saveToAllForm" (ngSubmit)="saveToAll()">
-        <div class="flex flex-row gap-4 items-center justify-between">
+        <div class="flex flex-row gap-4 items-start justify-between">
+          <app-select-tags
+            [parentFormGroup]="saveToAllForm"></app-select-tags>
           <app-select-country
             [parentFormGroup]="saveToAllForm"></app-select-country>
         </div>

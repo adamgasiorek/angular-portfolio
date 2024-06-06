@@ -75,6 +75,11 @@ export class SelectTagsComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tags = this.parentFormGroup!.get('tags')?.value;
+    this.parentFormGroup?.get('tags')?.valueChanges.subscribe(value => {
+      if ((value ?? []).length > 0) {
+        this.tags = value;
+      }
+    });
     this.cdr.detectChanges();
   }
 
@@ -104,13 +109,11 @@ export class SelectTagsComponent implements AfterViewInit {
   edit(fruit: string, event: MatChipEditedEvent) {
     const value = event.value.trim();
 
-    // Remove fruit if it no longer has a name
     if (!value) {
       this.remove(fruit);
       return;
     }
 
-    // Edit existing fruit
     const index = this.tags.indexOf(fruit);
     if (index >= 0) {
       this.tags[index] = value;
