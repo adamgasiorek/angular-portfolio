@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { AlbumsService } from '../../services/albums.service';
+import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { GalleryAlbumsComponent } from '../../../../components/gallery-albums/gallery-albums.component';
@@ -11,19 +10,11 @@ import { GalleryAlbumsComponent } from '../../../../components/gallery-albums/ga
   imports: [AsyncPipe, JsonPipe, GalleryAlbumsComponent],
   templateUrl: './albums-nested.component.html',
   styleUrl: './albums-nested.component.scss',
-  providers: [AlbumsService],
 })
 export class AlbumsNestedComponent {
-  albums$: Observable<any | null> = of(null);
+  albums$: Observable<any>;
 
-  constructor(
-    private albumsService: AlbumsService,
-    private route: ActivatedRoute
-  ) {
-    this.route.params.subscribe(params => {
-      const id = params['album'];
-
-      this.albums$ = this.albumsService.getAlbums(id);
-    });
+  constructor(private route: ActivatedRoute) {
+    this.albums$ = this.route.data.pipe(map(({ data }) => data));
   }
 }

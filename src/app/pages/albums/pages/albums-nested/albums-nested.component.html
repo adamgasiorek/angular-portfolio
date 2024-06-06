@@ -1,1 +1,3 @@
-<app-gallery-albums [albums]="albums$ | async" [nestedAlbum]="true"></app-gallery-albums>
+@if(albums$ | async; as albums) {
+  <app-gallery-albums [albums]="albums$ | async" [nestedAlbum]="true"></app-gallery-albums>
+}

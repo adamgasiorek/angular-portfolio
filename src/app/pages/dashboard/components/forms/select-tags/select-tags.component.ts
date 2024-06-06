@@ -12,6 +12,7 @@ import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
+  MatChipEditedEvent,
   MatChipGrid,
   MatChipInput,
   MatChipInputEvent,
@@ -97,6 +98,22 @@ export class SelectTagsComponent implements AfterViewInit {
       this.tags.splice(index, 1);
 
       this.announcer.announce(`Removed ${fruit}`);
+    }
+  }
+
+  edit(fruit: string, event: MatChipEditedEvent) {
+    const value = event.value.trim();
+
+    // Remove fruit if it no longer has a name
+    if (!value) {
+      this.remove(fruit);
+      return;
+    }
+
+    // Edit existing fruit
+    const index = this.tags.indexOf(fruit);
+    if (index >= 0) {
+      this.tags[index] = value;
     }
   }
 

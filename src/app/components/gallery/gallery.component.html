@@ -14,8 +14,8 @@
 
 @if(currentIndex !== null) {
   <div class="lightbox" (click)="close()">
+    <span style="opacity: 0.5;" class="close" (click)="close()">&times;</span>
     <div class="lightbox-content" (click)="$event.stopPropagation()">
-      <span class="close" (click)="close()">&times;</span>
         @if(images[currentIndex].isVideo) {
           <video class="lightbox-video" controls>
             <source [src]="images[currentIndex]?.image" type="video/mp4">
@@ -24,9 +24,9 @@
         } @else {
           <img alt="" [src]="images[currentIndex].image" class="lightbox-image" />
         }
-        <a class="prev" (click)="prev()">&#10094;</a>
-        <a class="next" (click)="next()">&#10095;</a>
     </div>
+    <a style="opacity: 0.5;" class="prev" (click)="prev()">&#10094;</a>
+    <a style="opacity: 0.5;" class="next" (click)="next()">&#10095;</a>
   </div>
 
 }

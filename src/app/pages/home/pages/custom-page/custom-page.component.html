@@ -1,5 +1,10 @@
-@if ((post$ | async).length === 0) {
-  no pictures with this filters
-} @else {
-  <app-gallery [images]="post$ | async"></app-gallery>
+@if (album$ | async; as album) {
+  <h3>{{album.name}}</h3>
+
+  @if (album.pictures.length === 0) {
+    no pictures with this filters
+  } @else {
+    <app-gallery [images]="album.pictures"></app-gallery>
+  }
 }
+

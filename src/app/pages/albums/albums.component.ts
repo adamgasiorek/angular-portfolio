@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { RouterLink } from '@angular/router';
-import { AlbumsService } from './services/albums.service';
-import { Observable, of } from 'rxjs';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { GalleryAlbumsComponent } from '../../components/gallery-albums/gallery-albums.component';
 
@@ -18,12 +17,11 @@ import { GalleryAlbumsComponent } from '../../components/gallery-albums/gallery-
     JsonPipe,
     GalleryAlbumsComponent,
   ],
-  providers: [AlbumsService],
 })
 export class AlbumsComponent {
-  albums$: Observable<any | null> = of(null);
+  albums$: Observable<any>;
 
-  constructor(private albumsService: AlbumsService) {
-    this.albums$ = this.albumsService.getMainAlbums();
+  constructor(private route: ActivatedRoute) {
+    this.albums$ = this.route.data.pipe(map(({ data }) => data));
   }
 }
