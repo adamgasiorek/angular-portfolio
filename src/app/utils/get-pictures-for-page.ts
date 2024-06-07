@@ -19,11 +19,11 @@ export const getPicturesForPage = (
         filterCountry
           ? where('country', '==', capitalize(filterCountry))
           : where('image', '>', 'h'),
-        filterTags.length > 0
+        (filterTags ?? []).length > 0
           ? where(
               'tags',
               'array-contains',
-              filterTags.length > 0 ? filterTags[0] : ''
+              (filterTags ?? []).length > 0 ? filterTags[0] : ''
             )
           : where('image', '>', 'h')
       )
