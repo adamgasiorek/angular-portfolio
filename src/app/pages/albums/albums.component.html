@@ -1,4 +1,7 @@
 @if(albums$ | async; as albums) {
-  <app-gallery-albums [albums]="albums"></app-gallery-albums>
+  <h2>All countries</h2>
+  <app-gallery-albums [albums]="albums.travel"></app-gallery-albums>
+  <h2>Other</h2>
+  <app-gallery-albums [albums]="albums.other"></app-gallery-albums>
 }
 

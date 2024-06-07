@@ -1,5 +1,5 @@
 import { ResolveFn, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { Firestore } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
@@ -13,5 +13,12 @@ export const albumsTravelResolver: ResolveFn<Observable<any>> = (
   auth: Auth = inject(Auth),
   router: Router = inject(Router)
 ): Observable<any> => {
-  return albumsService.getAlbumsTravel();
+  return albumsService.getAlbumsTravel().pipe(
+    switchMap((data: any) =>
+      of({
+        other: data[0],
+        travel: data[1],
+      })
+    )
+  );
 };
