@@ -13,7 +13,8 @@
 </div>
 
 @if(currentIndex !== null) {
-  <div class="lightbox" (click)="close()">
+  <div class="lightbox">
+    <div style="position:absolute;width: 100%;height: 100%;" (click)="close()"></div>
     <span style="opacity: 0.5;" class="close" (click)="close()">&times;</span>
     <div class="lightbox-content" (click)="$event.stopPropagation()">
         @if(images[currentIndex].isVideo) {

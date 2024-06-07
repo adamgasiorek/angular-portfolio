@@ -3,6 +3,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 300px;
   gap: 16px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .container {

@@ -2,7 +2,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
+
 
 .thumb {
   cursor: pointer;
@@ -63,8 +68,8 @@
   position: relative;
   max-width: 80%;
   max-height: 80%;
-  min-width: 300px;
-  min-height: 400px;
+  min-width: 50vw;
+  min-height: 30vh;
   animation: pulse 2s infinite;
 }
 
@@ -91,12 +96,13 @@
 }
 
 .prev, .next {
+  z-index: 99;
   cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
-  padding: 16px;
-  margin-top: -50px;
+  padding: 120px 16px;
+  margin-top: -120px;
   color: white;
   font-weight: bold;
   font-size: 20px;
