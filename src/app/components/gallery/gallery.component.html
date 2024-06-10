@@ -3,11 +3,12 @@
     <div class="thumb" [ngClass]="{
         'tall': image.isTall,
         'short': !image.isTall
-      }" (click)="open(i)">
+      }"
+         [style.background-image]="'url('+image.thumbnail+')'"
+         (click)="open(i)">
       @if(image.isVideo) {
         <div class="play">▶</div>
       }
-      <img [src]="image.thumbnail" alt="Image thumbnail">
     </div>
   }
 </div>
