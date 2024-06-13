@@ -4,8 +4,10 @@ import { AlbumsNestedComponent } from './pages/albums-nested/albums-nested.compo
 import { AlbumsSecuredComponent } from './pages/albums-secured/albums-secured.component';
 import { albumsTravelResolver } from './resolvers/albums-travel.resolver';
 import { albumsFamilyResolver } from './resolvers/albums-family.resolver';
-import { AuthGuard } from '@angular/fire/auth-guard';
+import { AuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { albumsNestedResolver } from './resolvers/albums-nested.resolver';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 
 export const albumsRouting: Routes = [
   {
@@ -18,12 +20,14 @@ export const albumsRouting: Routes = [
     component: AlbumsSecuredComponent,
     resolve: { data: albumsFamilyResolver },
     canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
     path: 'secured/:album',
     component: AlbumsNestedComponent,
     resolve: { data: albumsNestedResolver },
     canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
   {
     path: ':album',
