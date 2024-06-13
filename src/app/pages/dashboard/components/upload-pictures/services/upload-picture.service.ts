@@ -38,7 +38,15 @@ export class UploadPictureService {
     for (const image of images) {
       const storageRef = ref(this.storage, prefix + image.filename);
       await uploadBytesResumable(storageRef, image.file);
-      await this.saveInDatabase(image, prefix);
+      const imageLink = await getDownloadURL(storageRef);
+      const thumbnailLink =
+        getIconPath(
+          imageLink.split('?alt=media')[0].split('.').slice(0, -1).join('.')
+        ) + '?alt=media';
+      await this.saveInDatabase(
+        { ...image, image: imageLink, thumbnail: thumbnailLink },
+        prefix
+      );
     }
   }
 
