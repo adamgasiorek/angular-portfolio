@@ -50,6 +50,14 @@ export class UploadPictureService {
     }
   }
 
+  async addPage(data: unknown) {
+    await addDoc(collection(this.firestore, 'pages'), data);
+  }
+
+  async addToAlbum(id: string, data: unknown) {
+    await addDoc(collection(this.firestore, `albums/${id}/albums`), data);
+  }
+
   private async saveInDatabase(image: UploadValue, prefix: string) {
     const doc: Picture = {
       private: image.private,

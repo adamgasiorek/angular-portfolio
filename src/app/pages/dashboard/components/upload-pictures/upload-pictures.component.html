@@ -6,10 +6,6 @@
     </mat-form-field>
 
     <button
-      [disabled]="picturesForm.invalid || picturesForm.value.saveLoading"
-      [ngClass]="{
-        'opacity-50': picturesForm.invalid || picturesForm.value.saveLoading
-      }"
       class="mb-4 bg-blue-500 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center">
       @if (picturesForm.value.saveLoading) {
         <svg
@@ -33,6 +29,54 @@
       Save
     </button>
   </div>
+
+  <div class="flex flex-row justify-between">
+
+    <form class="flex flex-row items-center justify-between w-full" [formGroup]="pageForm">
+      <div  class="flex flex-col mt-4">
+        <div class="flex flex-row">
+          <mat-checkbox formControlName="isUpdating">Update database</mat-checkbox>
+        </div>
+
+        <div class="flex flex-row mt-4">
+          <div class="flex flex-row gap-4 items-start justify-between">
+            <mat-form-field>
+              <mat-label>Tag</mat-label>
+              <input matInput type="text" formControlName="tag">
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+              <mat-label>Url</mat-label>
+              <input matInput type="text" formControlName="url">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form class="flex flex-row items-center justify-between w-full" [formGroup]="albumForm">
+      <div  class="flex flex-col mt-4">
+        <div class="flex flex-row">
+          <mat-checkbox formControlName="isAddingToAlbum">Add to Album</mat-checkbox>
+        </div>
+
+        <div class="flex flex-row mt-4">
+          <div class="flex flex-row gap-4 items-start justify-between">
+            <mat-form-field>
+              <mat-label>Id of album</mat-label>
+              <input matInput type="text" formControlName="id">
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+
 
   <div  class="flex flex-col mt-4">
     <p>Filters for all</p>

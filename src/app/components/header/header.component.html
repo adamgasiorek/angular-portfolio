@@ -4,6 +4,9 @@
   </a>
   <nav>
     <a [routerLink]="['albums']">Albums</a>
+    <a *appIsAuthorized [routerLink]="['albums', 'secured']">Family</a>
     <a [routerLink]="['about']">About</a>
+    <a *appIsNotAuthorized [routerLink]="['auth']">Login</a>
+    <a *appIsAuthorized (click)="logout()">Logout</a>
   </nav>
 </header>

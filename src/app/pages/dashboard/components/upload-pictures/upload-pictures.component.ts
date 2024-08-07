@@ -18,10 +18,11 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { minLengthArray } from '../../../../utils/min-length-formarray';
-import { UploadValue } from './models/upload-value';
 import { SelectCountryComponent } from '../forms/select-country/select-country.component';
 import { getAspectRatio } from '../../../../utils/get-aspect-ratio';
 import { SelectTagsComponent } from '../forms/select-tags/select-tags.component';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { UploadValue } from './models/upload-value';
 
 @Component({
   selector: 'app-upload-pictures',
@@ -41,6 +42,7 @@ import { SelectTagsComponent } from '../forms/select-tags/select-tags.component'
     NgClass,
     SelectCountryComponent,
     SelectTagsComponent,
+    MatCheckbox,
   ],
   providers: [UploadPictureService],
   templateUrl: './upload-pictures.component.html',
@@ -50,6 +52,18 @@ export class UploadPicturesComponent {
     saveLoading: [false],
     folder: ['', Validators.required],
     pictures: this.formBuilder.array([], minLengthArray(1)),
+  });
+
+  pageForm = this.formBuilder.group({
+    isUpdating: [false, []],
+    tag: ['', []],
+    url: ['', []],
+  });
+
+  albumForm = this.formBuilder.group({
+    isAddingToAlbum: [false, []],
+    id: ['', []],
+    name: ['', []],
   });
 
   saveToAllForm = this.formBuilder.group({
@@ -71,6 +85,28 @@ export class UploadPicturesComponent {
   }
 
   async save() {
+    if (this.albumForm.get('isAddingToAlbum')?.value) {
+      await this.uploadPictureService.addToAlbum(
+        this.albumForm.get('id')?.value ?? '',
+        {
+          name: this.albumForm.get('name')?.value,
+          url: this.pageForm.get('url')?.value,
+          thumbnail: (this.picturesForm.get('pictures')?.value as any)[0][
+            'thumbnail'
+          ],
+        }
+      );
+      this.albumForm.reset();
+    }
+
+    if (this.pageForm.get('isUpdating')?.value) {
+      await this.uploadPictureService.addPage({
+        url: this.pageForm.get('url')?.value,
+        filterTags: [this.pageForm.get('tag')?.value],
+      });
+      this.pageForm.reset();
+    }
+
     this.picturesForm.patchValue({ saveLoading: true });
     await this.uploadPictureService.save(
       this.picturesForm.value.pictures as UploadValue[],
