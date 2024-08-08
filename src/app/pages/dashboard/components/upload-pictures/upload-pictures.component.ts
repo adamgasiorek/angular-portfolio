@@ -137,7 +137,9 @@ export class UploadPicturesComponent {
     const aspectRatio = await getAspectRatio(params.data.file);
     this.pictures.at(params.index).patchValue({
       loading: false,
-      isVideo: params.data.file.type === 'video/mp4',
+      isVideo:
+        params.data.file.type === 'video/mp4' ||
+        params.data.file.type === 'video/quicktime',
       isTall: aspectRatio < 0.8,
       ...params.data,
     });

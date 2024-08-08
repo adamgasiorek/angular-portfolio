@@ -1,0 +1,12 @@
+<form class="flex flex-col" [formGroup]="dupliacteNamesForm" (ngSubmit)="duplicateName()">
+  <h4>Remove duplicates</h4>
+  <mat-form-field class="example-form-field">
+    <mat-label>Tag</mat-label>
+    <input matInput type="text" formControlName="tag">
+  </mat-form-field>
+  <button
+    type="submit"
+    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200">
+    Send
+  </button>
+</form>

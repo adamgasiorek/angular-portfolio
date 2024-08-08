@@ -6,7 +6,17 @@ import {
   uploadBytesResumable,
 } from '@angular/fire/storage';
 import { UploadValue } from '../models/upload-value';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import {
+  addDoc,
+  and,
+  collection,
+  collectionData,
+  deleteDoc,
+  doc,
+  Firestore,
+  query,
+  where,
+} from '@angular/fire/firestore';
 import { Picture } from '../models/picture';
 import { timeout } from '../../../../../utils/timeout';
 import { getFileNameWithoutExtension } from '../../../../../utils/get-file-name';
@@ -56,6 +66,41 @@ export class UploadPictureService {
 
   async addToAlbum(id: string, data: unknown) {
     await addDoc(collection(this.firestore, `albums/${id}/albums`), data);
+  }
+
+  findAndRemoveDuplicates(arr: any, uniqueKey: any) {
+    const seen = new Map();
+    const duplicates = [] as any;
+
+    const filteredArray = arr.filter((item: any) => {
+      const key = item[uniqueKey];
+      if (seen.has(key)) {
+        duplicates.push(item.id);
+        return false;
+      } else {
+        seen.set(key, true);
+        return true;
+      }
+    });
+
+    return { filteredArray, duplicateIds: duplicates };
+  }
+
+  async removeDuplicatesByTag(tag: string) {
+    collectionData(
+      query(
+        collection(this.firestore, 'pictures'),
+        and(where('tags', 'array-contains', tag))
+      ),
+      {
+        idField: 'id',
+      }
+    ).subscribe((data: any) => {
+      const result = this.findAndRemoveDuplicates(data, 'filename');
+      result.duplicateIds.forEach(async (duplicateId: string) => {
+        await deleteDoc(doc(this.firestore, `pictures/${duplicateId}`));
+      });
+    });
   }
 
   private async saveInDatabase(image: UploadValue, prefix: string) {
