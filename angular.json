@@ -38,10 +38,6 @@
           "configurations": {
             "production": {
               "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
               ],
               "budgets": [
                 {
@@ -59,10 +55,6 @@
             },
             "development": {
               "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
               ],
               "optimization": false,
               "extractLicenses": false,

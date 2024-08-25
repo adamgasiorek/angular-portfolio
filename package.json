@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "@notionhq/client": "^2.2.15",
     "inquirer-autocomplete-prompt": "^3.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

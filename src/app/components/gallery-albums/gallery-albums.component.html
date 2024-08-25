@@ -1,8 +1,0 @@
-<section class="covers">
-  @for(album of albums; let i = $index;track i) {
-    <a [routerLink]="nestedAlbum ? ['/', album.url] : album.id" class="cursor container">
-      <h3 class="album-title">{{album.name}}</h3>
-      <div class="album-image" [style.background-image]="'url('+album.thumbnail+')'"></div>
-    </a>
-  }
-</section>
