@@ -1,7 +1,43 @@
-main {
-  padding: 20px 20px;
+.blur-image {
+  position: relative;
+}
 
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1420px;
+.animation {
+  animation: 1s fadeInUp;
+}
+
+.animation-content {
+  animation: 1s fadeInUp;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blur-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  background: linear-gradient(90deg,#181c25 0,transparent);
+}
+
+.blur-image:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  right: 0;
+  background: linear-gradient(270deg,#181c25 0,transparent);
 }

@@ -2,3 +2,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+  font-family: Lora, sans-serif;
+  src: url('../public/fonts/lora/Lora-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Lora, sans-serif;
+  src: url('../public/fonts/lora/Lora-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+body {
+  font-family: "Lora";
+  background-color: #181c25;
+  overscroll-behavior-y: none;
+  line-height: 1.5;
+  letter-spacing: 0.1px;
+  color: #c6c8cf;
+  }
+
+
+.font-darker {
+  color: #dee0e6;
+
+}
+
