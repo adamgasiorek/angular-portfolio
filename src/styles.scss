@@ -40,11 +40,6 @@ body {
   animation: 2s fadeInUp;
 }
 
-.animation-content {
-  animation: 1s fadeInUp;
-  animation-delay: 0.5s;
-}
-
 @keyframes fadeInUp {
   0% {
     opacity: 0;

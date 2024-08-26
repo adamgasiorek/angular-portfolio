@@ -3,15 +3,20 @@
 <!--    {{item.title}}-->
 <!--  }-->
 <!--}-->
-<div class="mt-16 px-6 flex-grow w-full grid place-content-center gap-12" style="padding-bottom: 140px;">
+<div class="relative blur-image max-w-screen-lg mx-auto animation">
+  <img src="bg.webp"  alt=""/>
+</div>
+
+<div class="mt-16 px-6 flex-grow w-full grid place-content-center gap-12 animation" style="padding-bottom: 140px;">
   <div style="max-width: 700px; display: flex; flex-direction: column; gap: 40px;">
     <h1 class="__className_e71791 lg:text-3xl text-2xl leading-normal fade0 font-medium font-darker" style="line-height: 1.8;">Traveling, Programming, and Beyond!</h1>
     <div class="__className_e71791 text-lg" style="text-align: left;">
-            <span class="fade1">
-                I come from southern Poland, but my place in the world is changing like in a kaleidoscope. I focus on getting to know new experiences and discovering the world from every angle: from philosophy, quantum physics, learning dance and foreign languages, to learning about the local culture while traveling. Whenever I am not traveling, I am busy implementing my own idea in business. I have created this blog for three reasons: for sharing my best travel photographies, for fulfilling my travel-dreams (sharing best memories) and to use this website as my professional technical portfolio
-            </span>
-      <br />
-      <span class="fade4"><br>— Adam Gąsiorek</span>
+        @for(paragraph of paragraphs; track $index) {
+          <p class="mb-8">
+            {{paragraph}}
+          </p>
+        }
+      <span class="fade4">— Adam Gąsiorek</span>
     </div>
 
     <hr style="border-color: #3E475F;"/>
@@ -35,3 +40,5 @@
 
   </div>
 </div>
+
+

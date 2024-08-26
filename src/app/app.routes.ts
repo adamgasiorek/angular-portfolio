@@ -11,4 +11,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/visited/visited.module').then(s => s.VisitedModule),
   },
+  {
+    path: 'pictures',
+    loadChildren: () =>
+      import('./pages/pictures/pictures.module').then(s => s.PicturesModule),
+  },
 ];

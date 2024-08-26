@@ -2,12 +2,69 @@ import { Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PageLayoutComponent } from '../../components/page-layout/page-layout.component';
+import { MapsModule } from './components/map/maps.module';
 
 @Component({
   selector: 'app-visited',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, PageLayoutComponent],
+  imports: [AsyncPipe, RouterLink, PageLayoutComponent, MapsModule],
   templateUrl: './visited.component.html',
   styleUrl: './visited.component.scss',
 })
-export class VisitedComponent {}
+export class VisitedComponent {
+  listMap = [
+    'PL',
+    'DE',
+    'SK',
+    'CZ',
+    'UA',
+    'SE',
+    'AT',
+    'FR',
+    'GB',
+    'IS',
+    'ES',
+    'IT',
+    'GR',
+    'TR',
+    'BE',
+    'NL',
+    'ME',
+    'HU',
+    'SM',
+    'LIE',
+    'LT',
+    'PT',
+    'MCO',
+    'CY',
+    'MT',
+    'IR',
+    'GE',
+    'AZ',
+    'AM',
+    'IL',
+    'MA',
+    'MX',
+    'BR',
+    'AR',
+    'PY',
+    'UY',
+    'CL',
+    'CO',
+    'PE',
+    'BO',
+    'NO',
+    'LI',
+    'MC',
+    'AD',
+    'IN',
+    'OM',
+    'AE',
+    'DK',
+    'VN',
+    'PH',
+    'KH',
+    'TH',
+  ];
+  list = this.listMap.join(',');
+}

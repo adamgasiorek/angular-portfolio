@@ -1,0 +1,15 @@
+h4 {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 22px;
+  align-items: center!important;
+  gap: 4px;
+}
+
+hr {
+  margin: 8px 0;
+}
+
+.values {
+  margin-bottom: 32px;
+}
