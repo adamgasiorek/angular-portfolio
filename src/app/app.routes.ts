@@ -6,4 +6,9 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/home/home.module').then(s => s.HomeModule),
   },
+  {
+    path: 'visited',
+    loadChildren: () =>
+      import('./pages/visited/visited.module').then(s => s.VisitedModule),
+  },
 ];

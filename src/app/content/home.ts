@@ -1,0 +1,3 @@
+export const home = [
+  'I come from southern Poland, but my place in the world is changing like in a kaleidoscope. I focus on getting to know new experiences and discovering the world from every angle: from philosophy, quantum physics, learning dance and foreign languages, to learning about the local culture while traveling. Whenever I am not traveling, I am busy implementing my own idea in business. I have created this blog for three reasons: for sharing my best travel photographies, for fulfilling my travel-dreams (sharing best memories) and to use this website as my professional technical portfolio',
+];
