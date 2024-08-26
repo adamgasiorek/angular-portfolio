@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MapsModule } from '../map/maps.module';
+import { PageLayoutComponent } from '../../../../components/page-layout/page-layout.component';
 
 @Component({
   selector: 'app-asia-map',
   standalone: true,
-  imports: [MapsModule],
+  imports: [MapsModule, PageLayoutComponent],
   templateUrl: './asia-map.component.html',
   styleUrl: './asia-map.component.scss',
 })
