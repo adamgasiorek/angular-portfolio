@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { homeRouting } from './home.routing';
 import { CmsService } from '../../services/cms.service';
 import { provideHttpClient } from '@angular/common/http';
+import { CalendarService } from '../../services/calendar.service';
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(homeRouting), CommonModule],
-  providers: [CmsService, provideHttpClient()],
+  providers: [CmsService, CalendarService, provideHttpClient()],
 })
 export class HomeModule {}
