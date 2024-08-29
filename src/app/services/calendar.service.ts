@@ -94,7 +94,6 @@ export class CalendarService {
       }
     }
 
-    console.log(calendar);
     return calendar;
   }
 }
