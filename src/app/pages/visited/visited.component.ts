@@ -65,6 +65,7 @@ export class VisitedComponent {
     'PH',
     'KH',
     'TH',
+    'MG',
   ];
   list = this.listMap.join(',');
 }
